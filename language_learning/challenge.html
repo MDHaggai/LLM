@@ -1,0 +1,16 @@
+<?php include 'views/header.php'; ?>
+
+<h2>Create Challenge</h2>
+<form action="challenge.php" method="POST">
+    <div class="mb-3">
+        <label for="opponent_id" class="form-label">Opponent ID</label>
+        <input type="text" class="form-control" id="opponent_id" name="opponent_id" required>
+    </div>
+    <div class="mb-3">
+        <label for="language" class="form-label">Language</label>
+        <input type="text" class="form-control" id="language" name="language" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Challenge</button>
+</form>
+
+<?php include 'views/footer.php'; ?>

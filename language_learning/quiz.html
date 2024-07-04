@@ -1,0 +1,15 @@
+<?php include 'views/header.php'; ?>
+
+<h2>Quiz</h2>
+<form action="submit_quiz.php" method="POST">
+    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+    <input type="hidden" name="language" value="Spanish">
+    <!-- Example question -->
+    <div class="mb-3">
+        <label for="question1" class="form-label">What is "hello" in Spanish?</label>
+        <input type="text" class="form-control" id="question1" name="answers[]" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<?php include 'views/footer.php'; ?>

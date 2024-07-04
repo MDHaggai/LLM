@@ -1,0 +1,46 @@
+<?php include 'views/header.php'; ?>
+
+<h2>Forum</h2>
+<form action="post.php" method="POST">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Post</button>
+</form>
+
+<?php
+include 'db.php';
+
+$result = $conn->query("SELECT posts.id, posts.title, posts.content, users.username FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC");
+
+if ($result->num_rows > 0) {
+    echo '<ul class="list-group mt-3">';
+    while ($row = $result->fetch_assoc()) {
+        echo '<li class="list-group-item">';
+        echo '<h5>' . htmlspecialchars($row['title']) . '</h5>';
+        echo '<p>' . htmlspecialchars($row['content']) . '</p>';
+        echo '<small>Posted by ' . htmlspecialchars($row['username']) . '</small>';
+        echo '<form action="comment.php" method="POST">';
+        echo '<div class="mb-3">';
+        echo '<label for="content" class="form-label">Comment</label>';
+        echo '<textarea class="form-control" id="content" name="content" rows="2" required></textarea>';
+        echo '</div>';
+        echo '<input type="hidden" name="post_id" value="' . htmlspecialchars($row['id']) . '">';
+        echo '<button type="submit" class="btn btn-secondary">Add Comment</button>';
+        echo '</form>';
+        echo '</li>';
+    }
+    echo '</ul>';
+} else {
+    echo '<p>No posts yet.</p>';
+}
+
+$conn->close();
+?>
+
+<?php include 'views/footer.php'; ?>
