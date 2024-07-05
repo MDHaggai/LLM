@@ -1,6 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['name'])) {
+    header('Location: index.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Required meta tags -->
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Language Learning App</title>
@@ -8,56 +15,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
-    <!-- Template CSS -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    <style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card-wrapper {
+            width: 300px;
+        }
+        body {
+            background-image: url('assets/images/bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
-<!--header-->
-<header id="site-header" class="fixed-top">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg stroke px-0">
-            <h1> 
-                <a class="navbar-brand" href="index.php">
-                    <span class="fa fa-language"></span> Language Learning
-                </a>
-            </h1>
-            <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
-                data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="services.php">contact admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.php">view progress</a>
-                    </li>
-                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</header>
+    <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <h1> 
+                    <a class="navbar-brand" href="index.php">
+                        <span class="fa fa-language"></span> Language Learning
+                    </a>
+                </h1>
+                <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.php">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.php">Contact Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.php">View Progress</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-</head>
-<body style="background-image: url('assets/images/bg.jpg'); background-size: cover; background-attachment: fixed;">
     <div class="container my-5">
         <div class="text-center mb-4 text-white">
             <h1>Choose Your Language</h1>
@@ -85,7 +103,7 @@
                             <h5 class="card-title">' . $language['name'] . '</h5>
                             <p class="card-text">Origin: ' . $language['origin'] . '</p>
                             <p class="card-text">' . $language['history'] . '</p>
-                            <a href="test_quiz.php?language=' . urlencode($language['name']) . '" class="btn btn-primary mt-auto">Take Quiz</a>
+                            <a href="real_Quiz.php?language=' . urlencode($language['name']) . '" class="btn btn-primary mt-auto">Take Quiz</a>
                         </div>
                     </div>
                 </div>';

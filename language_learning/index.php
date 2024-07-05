@@ -9,12 +9,17 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Language Learning App</title>
 </head>
 
 <body>
     <h1 style="font-weight: bold; color: blue;">Language Learning App</h1>
+
+    <?php if (isset($_SESSION['name'])): ?>
+        <h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
+        <a href="logout.php">Logout</a>
+    <?php endif; ?>
 
     <div class="container" id="container">
         <div class="form-container sign-up">
@@ -65,7 +70,7 @@ session_start();
         </div>
     </div>
 
-    <script src="assets/js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

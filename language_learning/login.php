@@ -1,6 +1,6 @@
 <?php
-include 'db.php';
 session_start();
+include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (password_verify($password, $hashedPassword)) {
         $_SESSION['user_id'] = $userId;
         $_SESSION['name'] = $userName;
-        header("Location: homepage.php"); // Redirect to homepage
+        header("Location: homepage.php");
         exit();
     } else {
         echo "Invalid email or password";
