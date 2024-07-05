@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = htmlspecialchars($_POST['name']);
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         $_SESSION['user_id'] = $con->insert_id;
         $_SESSION['name'] = $name;
-        header("Location: homepage.php"); // Redirect to homepage after successful registration
+        header("Location: homepage.php");
         exit();
     } else {
         $error = "Failed to register";
